@@ -17,7 +17,7 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         try {
-            if (in_array($request->status, ['todo', 'ongoing', 'done', 'canceled'])) {
+            if (in_array($request->status, ['todo', 'ongoing', 'completed', 'canceled'])) {
                 $tasks = Task::where('status', $request->status)->orderBy('priority')->orderBy('due_date', 'DESC')->get();
             } else {
                 $tasks = Task::all()->sortBy('priority')->sortByDesc('due_date');

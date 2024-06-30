@@ -28,7 +28,7 @@ class TaskRequest extends FormRequest
             'description' => 'required|string',
             'status' => 'required|string|in:todo,ongoing,done,canceled',
             'priority' => 'required|integer|in:0,1,2,3,4',
-            'due_date' => 'date'
+            'due_date' => 'nullable|date',
         ];
     }
 
