@@ -72,6 +72,34 @@ class TaskController extends Controller
         }
     }
 
+        /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        try {
+            $task = Task::findOrFail($id);
+
+            return response()->json([
+                'meta' => [
+                    'code' => 200,
+                    'status' => 'OK',
+                    'message' => 'Success get a task',
+                ],
+                'data' => TaskResource::make($task),
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'meta' => [
+                    'code' => 404,
+                    'status' => 'Not Found',
+                    'message' => 'Task not found',
+                ],
+                'errors' => $th->getMessage(),
+            ]);
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      */
