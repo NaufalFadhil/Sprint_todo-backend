@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskDeleteRequest;
 use App\Http\Requests\TaskRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
@@ -72,14 +73,6 @@ class TaskController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
@@ -92,6 +85,27 @@ class TaskController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $task = Task::findOrFail($id);
+            $task->delete();
+
+            return response()->json([
+                'meta' => [
+                    'code' => 200,
+                    'status' => 'OK',
+                    'message' => 'Success delete a task',
+                ],
+                'data' => TaskResource::make($task),
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'meta' => [
+                    'code' => 500,
+                    'status' => 'Internal Server Error',
+                    'message' => 'Failed delete a task',
+                ],
+                'errors' => $th->getMessage(),
+            ]);
+        }
     }
 }

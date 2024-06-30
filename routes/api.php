@@ -6,3 +6,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/tasks/{status?}', [TaskController::class, 'index']);
 Route::post('/tasks', [TaskController::class, 'create']);
+Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
