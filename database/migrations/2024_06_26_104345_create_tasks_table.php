@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->enum('status', ['todo', 'in_progress', 'done', 'canceled'])->default('todo');
+            $table->enum('status', ['todo', 'ongoing', 'completed', 'canceled'])->default('todo');
+            $table->enum('priority', ['0', '1', '2', '3', '4'])->default('4');
+            $table->timestamp('due_date')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
