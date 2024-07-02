@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TaskResource extends JsonResource
+class SubTaskResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,8 +20,7 @@ class TaskResource extends JsonResource
             'description' => $this->description,
             'status' => $this->status,
             'priority' => 'P' . $this->priority,
-            'due_date' => $this->due_date ? date('Y-m-d', strtotime($this->due_date)) : null,
-            'subtasks' => SubTaskResource::collection($this->sub),
+            'due_date' => $this->due_date ? date('Y-m-d', strtotime($this->due_date)) : null
         ];
     }
 }
