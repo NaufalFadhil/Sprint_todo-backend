@@ -22,9 +22,7 @@ class SubTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'task_id' => 'required|exists:tasks,id',
             'title' => 'required|string',
-            'description' => 'required|string',
             'status' => 'required|string|in:todo,ongoing,done,canceled',
             'priority' => 'required|integer|in:0,1,2,3,4',
             'due_date' => 'nullable|date',
