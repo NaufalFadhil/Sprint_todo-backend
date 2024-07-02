@@ -6,20 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Task extends Model
+class Subtask extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'task_id',
         'title',
         'description',
         'status',
         'priority',
         'due_date',
     ];
-
-    public function sub()
-    {
-        return $this->hasMany(Subtask::class);
-    }
 }
