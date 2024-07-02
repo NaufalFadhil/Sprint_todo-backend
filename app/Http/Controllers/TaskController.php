@@ -18,7 +18,7 @@ class TaskController extends Controller
     {
         try {
             if (in_array($request->status, ['todo', 'ongoing', 'completed', 'canceled'])) {
-                $tasks = Task::where('status', $request->status)->with('sub')->orderBy('priority')->orderBy('due_date', 'ASC')->get();
+                $tasks = Task::where('status', $request->status)->with('sub')->orderBy('priority')->orderByRaw('due_date IS NULL')->orderBy('due_date', 'ASC')->get();
             } else {
                 $tasks = Task::all()->sortBy('priority')->sortByDesc('due_date');
             }

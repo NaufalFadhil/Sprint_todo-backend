@@ -83,10 +83,10 @@ class SubTaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SubTaskRequest $request, string $id, int $subtask_id)
     {
         try {
-            $subtask = Subtask::findOrFail($id);
+            $subtask = Subtask::findOrFail($subtask_id);
             $subtask->update($request->all());
 
             return response()->json([
@@ -112,10 +112,10 @@ class SubTaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id, int $subtask_id)
     {
         try {
-            $subtask = Subtask::findOrFail($id);
+            $subtask = Subtask::where('task_id', $id)->where('id', $subtask_id)->firstOrFail();
             $subtask->delete();
 
             return response()->json([
